@@ -10,18 +10,23 @@ let fileReader;
 const MENU_ITEMS = ["A", "B", "C"]
 
 class MessagesPerPerson extends React.Component {
+    // All this stuff is pretty boilerplate except for the hintDatapoint state element which is used for this react-vis element
     constructor(props) {
         super(props);
         this.state = {
             data: props.data,
             hintDatapoint: null
+            // add state variables as needed
         }
     }
+
+    // ensures that component updates as data is taken in from file
     componentDidUpdate(prevProps) {
         if (this.props.data !== prevProps.data) {
             this.setState({ data: this.props.data });
         }
     }
+    // end basic boilerplate stuff
 
     render() {
         if (this.props.data == null) {

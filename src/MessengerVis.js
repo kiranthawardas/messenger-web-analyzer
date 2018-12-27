@@ -6,7 +6,7 @@ import './style.css';
 import MessagesPerPerson from './MessagesPerPerson.js'
 
 let fileReader;
-const MENU_ITEMS = ["A", "B", "C"]
+const MENU_ITEMS = ["A"] // Populates Navigation component
 
 class MessengerVis extends React.Component {
     constructor(props) {
@@ -68,18 +68,12 @@ function Visualization(props) {
                     data={props.data}
                 />
             );
-        case "B":
-            return (
-                <MessagesPerPerson
-                    data={props.data}
-                />
-            );
-        case "C":
-            return (
-                <MessagesPerPerson
-                    data={props.data}
-                />
-            );
+        // case "B":
+        // return (
+        //     <SomeComponent
+        //         data={props.data}
+        //     />
+        // );
         default:
             return null;
 
