@@ -42,6 +42,10 @@ class App extends React.Component {
         console.log(this.state.myData);
         return (
             <div>
+                <ReselectBar
+                    active={this.state.data !== null}
+                    onChange={this.onFileSelect}
+                />
                 <WelcomeScreen
                     active={this.state.file === null}
                     onChange={this.onFileSelect}
@@ -57,8 +61,8 @@ class App extends React.Component {
 function WelcomeScreen(props) {
     if (props.active) {
         return (
-            <div className="welcomeStyle">
-                <Jumbotron bsStyle="jumbotronStyle">
+            <div className="welcome-style">
+                <Jumbotron bsStyle="jumbotron-style">
                     <h1>Messenger Analyzer</h1>
                     <p>
                         Upload your messenger json file below to view stats about your messaging!
@@ -67,6 +71,21 @@ function WelcomeScreen(props) {
                         Browse <input onChange={props.onChange} type="file" />
                     </span>
                 </Jumbotron>
+            </div>
+        )
+    }
+    else {
+        return null;
+    }
+}
+function ReselectBar(props) {
+    if (props.active) {
+        return (
+            <div className="reselect-bar">
+                <h2>Messenger Analyzer</h2>
+                <span className="btn btn-outline-primary btn-file btn-lg">
+                    Browse <input onChange={props.onChange} type="file" />
+                </span>
             </div>
         )
     }

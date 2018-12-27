@@ -1,10 +1,10 @@
-.welcomeStyle {
+.welcome-style {
     font-size:100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.jumbotron-jumbotronStyle {
+.jumbotron-jumbotron-style {
   position: absolute;
   top: 50%;
   left:50%;
@@ -58,4 +58,31 @@
     position:absolute;
     left:10rem;
     margin:2rem;
+}
+.reselect-bar {
+    position:absolute;
+    top:0;
+    left:0;
+    height:6rem;
+    line-height:6rem;
+    width:100vw;
+    border-bottom:1px #cecece solid;
+}
+
+.reselect-bar h2 {
+    margin-left:1rem;
+    line-height: inherit;
+}
+
+.reselect-bar span {
+    position: absolute;
+    float: right;
+    top: 0;
+    right: 0;
+    line-height: inherit;
+    height: inherit;
+    padding: 0 4rem;
+}
+.main-screen-wrapper {
+    margin-top: 6rem;
 }

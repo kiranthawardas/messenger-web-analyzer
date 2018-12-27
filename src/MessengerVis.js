@@ -30,7 +30,7 @@ class MessengerVis extends React.Component {
             return null;
         }
         return (
-            <div>
+            <div className="main-screen-wrapper">
                 <Navigation
                     onSelect={this.select}
                 />
