@@ -17,6 +17,9 @@
     position: relative;
     overflow: hidden;
 }
+.jumbotron .btn-file {
+    font-size: 2rem;
+}
 .btn-file input[type=file] {
     position: absolute;
     top: 0;
@@ -54,10 +57,10 @@
 .item:hover, .item-active {
     /* background-color: rgb(61, 61, 61); */
 }
-.visualization-wrapper {
-    position:absolute;
-    left:10rem;
-    margin:2rem;
+.visualization-wrapper {position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 .reselect-bar {
     position:absolute;
@@ -70,11 +73,31 @@
 }
 
 .reselect-bar h2 {
-    margin-left:1rem;
+    position:absolute;
+    margin-left: auto;
+    margin-right: auto;
     line-height: inherit;
+    text-align: center;
+}
+
+.reselect-bar .chat-name {
+    left: 2rem;
+    font-size: 1.5rem;
+}
+
+.reselect-bar .title {
+    left:0;
+    right:0;
 }
 
 .reselect-bar span {
+    background-color:#007bff1a;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-radius: 0px;
     position: absolute;
     float: right;
     top: 0;

@@ -5,9 +5,10 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import MessagesPerPerson from './MessagesPerPerson.js'
 import DayAndTimeHeatmap from './DayAndTimeHeatmap.js'
+import TotalMessagesTimeseries from './TotalMessagesTimeseries.js'
 
 let fileReader;
-const MENU_ITEMS = ["A", "B"] // Populates Navigation component
+const MENU_ITEMS = ["A", "B", "C"] // Populates Navigation component
 
 class MessengerVis extends React.Component {
     constructor(props) {
@@ -75,6 +76,12 @@ function Visualization(props) {
                     data={props.data}
                 />
             );
+        case "C":
+            return (
+                <TotalMessagesTimeseries
+                    data={props.data}
+                />
+            )
         default:
             return null;
 

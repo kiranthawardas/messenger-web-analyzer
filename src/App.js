@@ -14,7 +14,7 @@ class App extends React.Component {
         this.state = {
             file: null,
             data: null,
-            myData: null
+            chatName: ""
         }
         this.onFileSelect = this.onFileSelect.bind(this)
     }
@@ -31,7 +31,9 @@ class App extends React.Component {
                 return;
             }
             fr.onload = function (e) {
-                _this.setState({ data: JSON.parse(e.target.result) });
+                let data = JSON.parse(e.target.result);
+                _this.setState({ data: data, chatName: data.title });
+
             };
         });
     }
@@ -43,6 +45,7 @@ class App extends React.Component {
                 <ReselectBar
                     active={this.state.data !== null}
                     onChange={this.onFileSelect}
+                    chatName={this.state.chatName}
                 />
                 <WelcomeScreen
                     active={this.state.file === null}
@@ -66,7 +69,7 @@ function WelcomeScreen(props) {
                         Upload your messenger json file below to view stats about your messaging!
                     </p>
                     <span className="btn btn-outline-primary btn-file btn-lg">
-                        Browse <input onChange={props.onChange} type="file" />
+                        Browse for Messenger JSON File<input onChange={props.onChange} type="file" />
                     </span>
                 </Jumbotron>
             </div>
@@ -78,9 +81,19 @@ function WelcomeScreen(props) {
 }
 function ReselectBar(props) {
     if (props.active) {
+        let displayChatName;
+        if (props.chatName) {
+            if (props.chatName.length > 20) {
+                displayChatName = props.chatName.substring(0, 20) + "...";
+            }
+            else {
+                displayChatName = props.chatName;
+            }
+        }
         return (
             <div className="reselect-bar">
-                <h2>Messenger Analyzer</h2>
+                {displayChatName && <h2 className="chat-name" title={props.chatName}>{displayChatName}</h2>}
+                <h2 className="title">Messenger Analyzer</h2>
                 <span className="btn btn-outline-primary btn-file btn-lg">
                     Browse <input onChange={props.onChange} type="file" />
                 </span>
