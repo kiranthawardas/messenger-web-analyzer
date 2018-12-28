@@ -31,7 +31,6 @@ class App extends React.Component {
                 return;
             }
             fr.onload = function (e) {
-                console.log(e.target.result);
                 _this.setState({ data: JSON.parse(e.target.result) });
             };
         });
@@ -39,7 +38,6 @@ class App extends React.Component {
 
 
     render() {
-        console.log(this.state.myData);
         return (
             <div>
                 <ReselectBar

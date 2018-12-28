@@ -6,9 +6,6 @@ import './style.css';
 import * as d3 from 'd3-format'
 import { Hint, XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, HorizontalBarSeriesCanvas, VerticalBarSeriesCanvas } from 'react-vis';
 
-let fileReader;
-const MENU_ITEMS = ["A", "B", "C"]
-
 class MessagesPerPerson extends React.Component {
     // All this stuff is pretty boilerplate except for the hintDatapoint state element which is used for this react-vis element
     constructor(props) {
@@ -46,11 +43,22 @@ class MessagesPerPerson extends React.Component {
                             this.setState({ hintDatapoint: datapoint });
                         }}
                         data={transformData(this.state.data)} />
-                    {this.state.hintDatapoint ? <Hint value={this.state.hintDatapoint} /> : null}
+                    {this.state.hintDatapoint ? <Hint value={this.state.hintDatapoint} format={formatHint} /> : null}
                 </XYPlot>
             </div>
         )
     }
+}
+
+function formatHint(datapoint) {
+    return [
+        {
+            "title": "Sender", "value": datapoint.x
+        },
+        {
+            "title": "Messages", "value": datapoint.y
+        }
+    ]
 }
 function transformData(data) {
     let participants = {};
@@ -61,7 +69,6 @@ function transformData(data) {
         participants[message["sender_name"]]++;
     })
     let dataOut = [];
-    let i = 0;
     Object.keys(participants).forEach(function (participant) {
         dataOut.push({ y: participants[participant], x: participant });
     })
