@@ -6,6 +6,7 @@ import './style.css';
 import MessagesPerPerson from './MessagesPerPerson.js'
 import DayAndTimeHeatmap from './DayAndTimeHeatmap.js'
 import TotalMessagesTimeseries from './TotalMessagesTimeseries.js'
+import WordFrequency from './WordFrequency.js'
 
 let fileReader;
 const MENU_ITEMS = ["A", "B", "C"] // Populates Navigation component
@@ -78,7 +79,7 @@ function Visualization(props) {
             );
         case "C":
             return (
-                <TotalMessagesTimeseries
+                <WordFrequency
                     data={props.data}
                 />
             )
@@ -87,4 +88,6 @@ function Visualization(props) {
 
     }
 }
+
+
 export default MessengerVis;

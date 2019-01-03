@@ -36,7 +36,13 @@ class DayAndTimeHeatmap extends React.Component {
         return (
             <div>
                 <XYPlot
-                    width={window.innerWidth * 0.85} height={window.innerHeight * 0.85} xDomain={[0, 23]} yDomain={[0, 6]}>
+                    onMouseLeave={() => {
+                        this.setState({ hintDatapoint: null })
+                    }}
+                    width={window.innerWidth * 0.85}
+                    height={window.innerHeight * 0.85}
+                    xDomain={[0, 23]}
+                    yDomain={[0, 6]}>
                     <XAxis
                         xDomain={[0, 23]}
                         tickTotal={24}

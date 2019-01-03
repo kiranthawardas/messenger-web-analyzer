@@ -35,20 +35,20 @@
     display: block;
 }
 .navigation {
-    height:100vh;
-    max-width:10rem;
+    width:5vw;
+    max-width:6vw;
     margin:0px !important;
     position:absolute;
     float:left;
 }
 .item {
-    height: 10rem;
-    width:10rem;
+    height: 5vw;
+    width:5vw;
     margin:0.2rem;
     transition: 0.3s;
     text-align:center;
-    font-size:6rem;
-    line-height:10rem;
+    font-size:3vw;
+    line-height:5vw;
     -webkit-user-select: none; /* Safari */        
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* IE10+/Edge */
@@ -108,6 +108,10 @@
 }
 .main-screen-wrapper {
     margin-top: 6rem;
+}
+
+.word-frequency {
+    display:flex;
 }
 
 /* .daytime-heatmap-hint {

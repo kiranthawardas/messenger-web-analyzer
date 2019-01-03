@@ -33,7 +33,7 @@ class TotalMessagesTimeseries extends React.Component {
             <div>
                 <XYPlot xType={'ordinal'}
                     width={window.innerWidth * 0.85}
-                    height={500}>
+                    height={window.innerHeight * 0.85}>
                     <VerticalGridLines />
                     <HorizontalGridLines />
                     <XAxis
