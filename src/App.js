@@ -5,8 +5,6 @@ import { Jumbotron } from 'react-bootstrap'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 
-let fileReader;
-
 class App extends React.Component {
 
     constructor(props) {

@@ -4,7 +4,7 @@ import '../node_modules/react-vis/dist/style.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 import * as d3 from 'd3-format'
-import { Hint, XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, HorizontalBarSeriesCanvas, VerticalBarSeriesCanvas } from 'react-vis';
+import { Hint, XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalGridLines, VerticalBarSeriesCanvas } from 'react-vis';
 
 class MessagesPerPerson extends React.Component {
     // All this stuff is pretty boilerplate except for the hintDatapoint state element which is used for this react-vis element
@@ -63,6 +63,7 @@ function formatHint(datapoint) {
         }
     ]
 }
+
 function transformData(data) {
     let participants = {};
     data["participants"].forEach(function (participant) {
@@ -73,8 +74,12 @@ function transformData(data) {
     })
     let dataOut = [];
     Object.keys(participants).forEach(function (participant) {
-        dataOut.push({ y: participants[participant], x: participant });
+        dataOut.push({ x: participant, y: participants[participant] });
     })
-    return dataOut;
+
+    return dataOut.sort(
+        (a, b) =>
+            b["y"] -
+            a["y"]);
 }
 export default MessagesPerPerson;

@@ -3,7 +3,6 @@ import React from 'react'
 import '../node_modules/react-vis/dist/style.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
-import * as d3 from 'd3-format'
 import { XYPlot, XAxis, YAxis, HeatmapSeries, Hint } from 'react-vis';
 
 const DAYS = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
@@ -16,7 +15,7 @@ class DayAndTimeHeatmap extends React.Component {
         super(props);
         this.state = {
             data: props.data,
-            hintDatapoint: null
+            hintDatapoint: {}
             // add state variables as needed
         }
     }
@@ -95,4 +94,5 @@ function transformData(data) {
     })
     return dataOut;
 }
+
 export default DayAndTimeHeatmap;

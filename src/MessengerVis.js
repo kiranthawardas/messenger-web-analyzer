@@ -8,8 +8,7 @@ import DayAndTimeHeatmap from './DayAndTimeHeatmap.js'
 import TotalMessagesTimeseries from './TotalMessagesTimeseries.js'
 import WordFrequency from './WordFrequency.js'
 
-let fileReader;
-const MENU_ITEMS = ["A", "B", "C"] // Populates Navigation component
+const MENU_ITEMS = ["A", "B", "C", "D"] // Populates Navigation component
 
 class MessengerVis extends React.Component {
     constructor(props) {
@@ -80,6 +79,12 @@ function Visualization(props) {
         case "C":
             return (
                 <WordFrequency
+                    data={props.data}
+                />
+            )
+        case "D":
+            return (
+                <TotalMessagesTimeseries
                     data={props.data}
                 />
             )

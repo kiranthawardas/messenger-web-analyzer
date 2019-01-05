@@ -41,7 +41,7 @@ class WordFrequency extends React.Component {
             return null;
         }
         return (
-            <div className="word-frequency">
+            <div className="visualization-with-legend">
                 <XYPlot xType={'ordinal'}
                     stackBy="y"
                     onMouseLeave={() => {
@@ -119,7 +119,7 @@ class WordFrequency extends React.Component {
                     key={sender}
                     data={_this.state.barSeriesData[sender]}
                     onNearestX={(datapoint) => {
-                        if (!_this.state.hintDatapoint || datapoint.x != _this.state.hintDatapoint.x) {
+                        if (!_this.state.hintDatapoint || datapoint.x !== _this.state.hintDatapoint.x) {
                             _this.setState({ hintDatapoint: datapoint })
                         }
                     }}
@@ -134,7 +134,6 @@ function wordFreq(_this, data) {
 
     let wordCounts = {}; // map (word->count)
     let wordCountsPerSender = {}; // map (sender->word->count)
-    let justCount = 0;
     data["messages"].forEach(function (message) {
         if (message["content"] && !containsProtectedWords(message["content"])) {
             const wordsArray = formatString(message["content"]).split(/\s+/);
@@ -145,7 +144,7 @@ function wordFreq(_this, data) {
 
                     // attempt to decode emojis
                     try {
-                        currentWord = utf8.decode(eval('\'' + currentWord + '\''));
+                        currentWord = utf8.decode(currentWord);
                     }
                     catch (err) {
                         currentWord = word.trim().toLowerCase();
