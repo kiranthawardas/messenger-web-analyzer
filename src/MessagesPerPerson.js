@@ -54,12 +54,13 @@ class MessagesPerPerson extends React.Component {
 }
 
 function formatHint(datapoint) {
+    let format = d3.format(",");
     return [
         {
             "title": "Sender", "value": datapoint.x
         },
         {
-            "title": "Messages", "value": datapoint.y
+            "title": "Messages", "value": format(datapoint.y)
         }
     ]
 }
