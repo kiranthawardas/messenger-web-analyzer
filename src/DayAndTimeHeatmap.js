@@ -15,7 +15,7 @@ class DayAndTimeHeatmap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: props.data,
+            transformedData: transformData(props.data),
             hintDatapoint: {}
             // add state variables as needed
         }
@@ -24,7 +24,7 @@ class DayAndTimeHeatmap extends React.Component {
     // ensures that component updates as data is taken in from file
     componentDidUpdate(prevProps) {
         if (this.props.data !== prevProps.data) {
-            this.setState({ data: this.props.data });
+            this.setState({ transformedData: transformData(this.props.data) });
         }
     }
     // end basic boilerplate stuff
@@ -55,7 +55,7 @@ class DayAndTimeHeatmap extends React.Component {
                     <HeatmapSeries
                         colorRange={["#f4f9ff", "#003268"]}
                         xDomain={[0, 23]} yDomain={[0, 6]}
-                        data={transformData(this.state.data)}
+                        data={this.state.transformedData}
                         onNearestXY={(datapoint, event) => {
                             this.setState({
                                 hintDatapoint: datapoint
@@ -80,6 +80,7 @@ function formatHint(datapoint) {
 }
 
 function transformData(data) {
+    if (!data) return [];
     let transform = { 0: {}, 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} };
     data["messages"].forEach(function (message) {
         var date = new Date(message["timestamp_ms"]);

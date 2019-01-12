@@ -114,6 +114,12 @@
     display:flex;
 }
 
+.total-messages-heatmap-container {
+    position:absolute;
+    top:0;
+    left:0;
+}
+
 /* .daytime-heatmap-hint {
     background-color:black;
     padding:0.3rem;

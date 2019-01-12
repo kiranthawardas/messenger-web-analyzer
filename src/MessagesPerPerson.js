@@ -11,7 +11,7 @@ class MessagesPerPerson extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: props.data,
+            transformedData: transformData(props.data),
             hintDatapoint: null
             // add state variables as needed
         }
@@ -20,7 +20,7 @@ class MessagesPerPerson extends React.Component {
     // ensures that component updates as data is taken in from file
     componentDidUpdate(prevProps) {
         if (this.props.data !== prevProps.data) {
-            this.setState({ data: this.props.data });
+            this.setState({ transformedData: transformData(this.props.data) });
         }
     }
     // end basic boilerplate stuff
@@ -45,7 +45,7 @@ class MessagesPerPerson extends React.Component {
                         onNearestX={(datapoint, event) => {
                             this.setState({ hintDatapoint: datapoint });
                         }}
-                        data={transformData(this.state.data)} />
+                        data={this.state.transformedData} />
                     {this.state.hintDatapoint ? <Hint value={this.state.hintDatapoint} format={formatHint} /> : null}
                 </XYPlot>
             </div>
@@ -66,6 +66,7 @@ function formatHint(datapoint) {
 }
 
 function transformData(data) {
+    if (!data) return [];
     let participants = {};
     data["participants"].forEach(function (participant) {
         participants[participant["name"]] = 0;
