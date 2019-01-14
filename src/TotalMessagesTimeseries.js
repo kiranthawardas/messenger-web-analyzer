@@ -42,7 +42,7 @@ class TotalMessagesTimeseries extends React.Component {
             <div className="visualization-with-legend">
                 <XYPlot
                     xType="time"
-                    width={window.innerWidth * 0.6}
+                    width={window.innerWidth * 0.8}
                     height={window.innerHeight * 0.85}
                     onMouseLeave={() => {
                         this.setState({ hintDatapoint: null })
@@ -82,7 +82,7 @@ class TotalMessagesTimeseries extends React.Component {
             return (
                 <DiscreteColorLegend
                     orientation={'vertical'}
-                    width={window.innerWidth * 0.15}
+                    width={window.innerWidth * 0.2}
                     height={window.innerHeight * 0.85}
                     items={items}
                 />

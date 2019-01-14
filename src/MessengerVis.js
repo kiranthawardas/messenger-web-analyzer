@@ -15,17 +15,14 @@ class MessengerVis extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: props.data
+            data: props.data,
+            selection: props.visualization
         }
-        this.select = this.select.bind(this);
     }
     componentDidUpdate(prevProps) {
-        if (this.props.data !== prevProps.data) {
-            this.setState({ data: this.props.data });
+        if (this.props !== prevProps) {
+            this.setState({ data: this.props.data, selection: this.props.visualization });
         }
-    }
-    select(item) {
-        this.setState({ selection: item })
     }
 
     render() {
@@ -34,9 +31,6 @@ class MessengerVis extends React.Component {
         }
         return (
             <div className="main-screen-wrapper">
-                <Navigation
-                    onSelect={this.select}
-                />
                 <div className="visualization-wrapper">
                     <Visualization
                         selection={this.state.selection}
@@ -46,22 +40,6 @@ class MessengerVis extends React.Component {
             </div>
         )
     }
-}
-function Navigation(props) {
-    const listItems = MENU_ITEMS.map((item) =>
-        <div
-            key={item}
-            className="item btn btn-outline-primary"
-            onClick={() => { props.onSelect(item) }}>
-            {item}
-        </div>
-
-    );
-    return (
-        <div className="navigation">
-            {listItems}
-        </div>
-    )
 }
 function Visualization(props) {
     if (!props.data) return null;

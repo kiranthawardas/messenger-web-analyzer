@@ -58,9 +58,11 @@
     /* background-color: rgb(61, 61, 61); */
 }
 .visualization-wrapper {
-    margin-left:6.5vw;
-    width:91vw;
+    width: 95vw;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 .reselect-bar {
     position:absolute;
     top:0;
@@ -122,6 +124,33 @@
     font-size: large;
     border-bottom: 1px #80808059 solid;
     padding-left:1rem;
+}
+
+.heatmap-inner-div {
+    height: 30px;
+    margin-top: -8.10811px;
+}
+.total-messages-heatmap-container .header-data {    
+    float:right;
+    font-weight: normal;
+    font-size:1.2rem;
+}
+
+.reselect-bar .dropdown, .reselect-bar button {
+    left: 0;
+    right: 0;
+    position: absolute;
+    width: 22rem;
+    margin-left: auto;
+    margin-right: auto;
+    height: 6rem;
+}
+
+.reselect-bar .dropdown .dropdown-item {
+    width:21rem;
+    font-size: 1.25rem;
+    line-height: 2.5rem;
+    text-align: center;
 }
 
 /* .daytime-heatmap-hint {

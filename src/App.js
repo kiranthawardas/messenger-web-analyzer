@@ -2,8 +2,11 @@
 import React from 'react';
 import MessengerVis from './MessengerVis.js'
 import { Jumbotron } from 'react-bootstrap'
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap';
+import 'jquery';
 import './style.css';
+
+const MENU_ITEMS = ["A", "B", "C", "D", "E"] // Populates Navigation component
 
 class App extends React.Component {
 
@@ -12,10 +15,35 @@ class App extends React.Component {
         this.state = {
             file: null,
             data: null,
-            chatName: ""
+            chatName: "",
+            visualization: "A"
         }
-        this.onFileSelect = this.onFileSelect.bind(this)
+        this.onFileSelect = this.onFileSelect.bind(this);
+        this.onVisualizationSelect = this.onVisualizationSelect.bind(this);
     }
+
+    render() {
+        return (
+            <div>
+                <ReselectBar
+                    active={this.state.data !== null}
+                    onChangeFile={this.onFileSelect}
+                    onChangeVisualization={this.onVisualizationSelect}
+                    chatName={this.state.chatName}
+                    visualization={this.state.visualization}
+                />
+                <WelcomeScreen
+                    active={this.state.file === null}
+                    onChange={this.onFileSelect}
+                />
+                <MessengerVis
+                    data={this.state.data}
+                    visualization={this.state.visualization}
+                />
+            </div>
+        )
+    }
+
     onFileSelect(e) {
         this.setState({ file: e.target.files[0] }, function () {
 
@@ -35,25 +63,8 @@ class App extends React.Component {
             };
         });
     }
-
-
-    render() {
-        return (
-            <div>
-                <ReselectBar
-                    active={this.state.data !== null}
-                    onChange={this.onFileSelect}
-                    chatName={this.state.chatName}
-                />
-                <WelcomeScreen
-                    active={this.state.file === null}
-                    onChange={this.onFileSelect}
-                />
-                <MessengerVis
-                    data={this.state.data}
-                />
-            </div>
-        )
+    onVisualizationSelect(visualization) {
+        this.setState({visualization:  visualization})
     }
 }
 
@@ -91,9 +102,34 @@ function ReselectBar(props) {
         return (
             <div className="reselect-bar">
                 {displayChatName && <h2 className="chat-name" title={props.chatName}>{displayChatName}</h2>}
-                <h2 className="title">Messenger Analyzer</h2>
+                <div className="dropdown">
+                    <button
+                        className="btn btn-outline-primary btn-file btn-lg dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                    >
+                        {props.visualization}
+                    </button>
+                    <div
+                        className="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton"
+                    >
+                        {MENU_ITEMS.map((item) =>
+                            <div
+                                key={item}
+                                onClick={() => props.onChangeVisualization(item)}
+                                className="dropdown-item"
+                                href="#">
+                                {item}
+                            </div>
+                        )}
+                    </div>
+                </div>
                 <span className="btn btn-outline-primary btn-file btn-lg">
-                    Browse <input onChange={props.onChange} type="file" />
+                    Browse <input onChange={props.onChangeFile} type="file" />
                 </span>
             </div>
         )

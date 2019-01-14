@@ -39,7 +39,7 @@ class DayAndTimeHeatmap extends React.Component {
                     onMouseLeave={() => {
                         this.setState({ hintDatapoint: null })
                     }}
-                    width={window.innerWidth * 0.85}
+                    width={window.innerWidth * .9}
                     height={window.innerHeight * 0.85}
                     xDomain={[0, 23]}
                     yDomain={[0, 6]}>
@@ -56,7 +56,7 @@ class DayAndTimeHeatmap extends React.Component {
                         colorRange={["#f4f9ff", "#003268"]}
                         xDomain={[0, 23]} yDomain={[0, 6]}
                         data={this.state.transformedData}
-                        onValueClick={(datapoint, event) => {
+                        onNearestXY={(datapoint, event) => {
                             this.setState({
                                 hintDatapoint: datapoint
                             });

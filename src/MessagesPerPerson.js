@@ -35,7 +35,7 @@ class MessagesPerPerson extends React.Component {
                     onMouseLeave={() => {
                         this.setState({ hintDatapoint: null })
                     }}
-                    width={window.innerWidth * 0.85}
+                    width={window.innerWidth * 0.9}
                     height={window.innerHeight * 0.85}>
                     <VerticalGridLines />
                     <HorizontalGridLines />
