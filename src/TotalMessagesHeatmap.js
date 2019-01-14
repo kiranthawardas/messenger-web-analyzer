@@ -3,10 +3,12 @@ import React from 'react'
 import '../node_modules/react-vis/dist/style.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
-import * as d3 from 'd3-format'
+import HeatMap from 'react-heatmap-grid'
 import moment from 'moment'
-import { XYPlot, XAxis, YAxis, HeatmapSeries, Hint } from 'react-vis';
-const DAYS = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+
+moment.locale('en-us')
+const yLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 
 class TotalMessagesHeatmap extends React.Component {
     // All this stuff is pretty boilerplate except for the hintDatapoint state element which is used for this react-vis element
@@ -14,7 +16,8 @@ class TotalMessagesHeatmap extends React.Component {
         super(props);
         this.state = {
             transformedData: transformData(this.props.data),
-            hintDatapoint: {}
+            hintDatapoint: {},
+            year: ""
             // add state variables as needed
         }
         this.renderSeries = this.renderSeries.bind(this);
@@ -32,41 +35,35 @@ class TotalMessagesHeatmap extends React.Component {
         if (this.props.data == null) {
             return null;
         }
-        return (
-            <div className="total-messages-heatmap-container">
-                {this.renderSeries()}
-            </div>
-        )
+        return (this.renderSeries())
     }
 
     renderSeries() {
         let _this = this;
-        return Object.keys(this.state.transformedData).map(function (year) {
+        let series = Object.keys(this.state.transformedData).map(function (year) {
+            console.log(_this.state.transformedData[year][0].length)
+            let xLabels = new Array(53).fill("");
+            for (let i = 0; i < 12; i++) {
+                let weekNum = moment().year(year).month(i).date(1).week() - 1;
+                xLabels[weekNum] = MONTHS[i];
+            }
             return (
-                <XYPlot
-                    key={year}
-                    // onMouseLeave={() => {
-                    //     _this.setState({ hintDatapoint: null })
-                    // }}
-                    width={1000}
-                    height={400}
-                    xDomain={[1, 52]}
-                    yDomain={[0, 6]}>
-                    <XAxis
-                        xDomain={[1, 52]}
-                        tickTotal={52}
-                        tickLabelAngle={-45}/>
-                    <YAxis
-                        yDomain={[0, 6]}
-                        tickTotal={7} />
-                    <HeatmapSeries
-                        colorRange={["#f4f9ff", "#003268"]}
-                        xDomain={[1, 52]} yDomain={[0, 6]}
+                <div className="total-messages-heatmap-container">
+                    <h4 key={year + "header"}>{year}</h4>
+                    <HeatMap
+                        key={year}
+                        background="#003268"
+                        xLabels={xLabels}
+                        yLabels={yLabels}
+                        xLabelsLocation={"bottom"}
+                        unit="messages"
                         data={_this.state.transformedData[year]}
+                        onMouseOver={(x, y) => alert(`Clicked ${x}, ${y}`)}
                     />
-                </XYPlot> 
+                </div>
             )
         })
+        return series;
     }
 }
 
@@ -83,32 +80,24 @@ function formatHint(datapoint) {
 function transformData(data) {
     let dataOut = {};
     for (let i = data["messages"].length - 1; i >= 0; i--) {
-        let week = moment(data["messages"][i]["timestamp_ms"]).week();
         let year = moment(data["messages"][i]["timestamp_ms"]).year();
         let weekday = moment(data["messages"][i]["timestamp_ms"]).weekday();
+        let week = moment(data["messages"][i]["timestamp_ms"]).week() - 1;
+        if (year !== moment(data["messages"][i]["timestamp_ms"]).weekYear()) {
+            week = 52;
+        }
         if (!dataOut[year]) {
-            dataOut[year] = [{
-                x: week,
-                y: weekday,
-                color: 1
-            }];
-        }
-        else {
-            let endOfArray = dataOut[year].length - 1;
-            if (dataOut[year][endOfArray]["x"] === week
-                && dataOut[year][endOfArray]["y"] === weekday) {
-                dataOut[year][endOfArray]["color"]++;
+            let endOfYear = moment().year(year).month(11).day(31);
+            let weeksInYear = 52;
+            if (endOfYear.weekYear() !== year) {
+                weeksInYear = 53;
             }
-            else {
-                dataOut[year].push({
-                    x: week,
-                    y: weekday,
-                    color: 1
-                })
-            }
+            dataOut[year] = new Array(yLabels.length)
+                .fill(0)
+                .map(() => new Array(weeksInYear).fill(0));
         }
+        dataOut[year][weekday][week]++;
     }
-    console.log(dataOut)
     return dataOut;
 }
 

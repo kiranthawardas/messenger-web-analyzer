@@ -75,7 +75,7 @@ class TotalMessagesTimeseries extends React.Component {
     }
     renderLegend() {
         if (this.state.topSenders.length > 0) {
-            let items = [{ title: "Total", color: "#FFFFFF" }]
+            let items = [{ title: "Total", color: "#000000" }]
             for (let i = 0; i < this.state.topSenders.length; i++) {
                 items.push({ title: this.state.topSenders[i], color: this.state.palette[i].css() })
             }

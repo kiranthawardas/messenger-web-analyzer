@@ -64,6 +64,7 @@ function Navigation(props) {
     )
 }
 function Visualization(props) {
+    if (!props.data) return null;
     switch (props.selection) {
         case "A":
             return (
@@ -96,7 +97,11 @@ function Visualization(props) {
                 />
             )
         default:
-            return null;
+            return (
+                <TotalMessagesHeatmap
+                    data={props.data}
+                />
+            )
 
     }
 }

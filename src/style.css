@@ -57,10 +57,9 @@
 .item:hover, .item-active {
     /* background-color: rgb(61, 61, 61); */
 }
-.visualization-wrapper {position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+.visualization-wrapper {
+    margin-left:6.5vw;
+    width:91vw;
 }
 .reselect-bar {
     position:absolute;
@@ -115,9 +114,14 @@
 }
 
 .total-messages-heatmap-container {
-    position:absolute;
-    top:0;
-    left:0;
+    padding: 3rem 1rem 1rem 1rem;
+}
+
+.total-messages-heatmap-container h4 {    
+    font-weight: 700;
+    font-size: large;
+    border-bottom: 1px #80808059 solid;
+    padding-left:1rem;
 }
 
 /* .daytime-heatmap-hint {

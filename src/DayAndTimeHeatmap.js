@@ -16,7 +16,7 @@ class DayAndTimeHeatmap extends React.Component {
         super(props);
         this.state = {
             transformedData: transformData(props.data),
-            hintDatapoint: {}
+            hintDatapoint: null
             // add state variables as needed
         }
     }
@@ -56,7 +56,7 @@ class DayAndTimeHeatmap extends React.Component {
                         colorRange={["#f4f9ff", "#003268"]}
                         xDomain={[0, 23]} yDomain={[0, 6]}
                         data={this.state.transformedData}
-                        onNearestXY={(datapoint, event) => {
+                        onValueClick={(datapoint, event) => {
                             this.setState({
                                 hintDatapoint: datapoint
                             });
