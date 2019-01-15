@@ -79,11 +79,22 @@ function WelcomeScreen(props) {
                 <Jumbotron bsStyle="jumbotron-style">
                     <h1>Messenger Analyzer</h1>
                     <p>
-                        Upload your messenger json file below to view stats about your messaging!
+                        <b>Analyze and visualize your Facebook messenger chats!</b><br></br><br></br>
                     </p>
                     <span className="btn btn-outline-primary btn-file btn-lg">
                         Browse for Messenger JSON File<input onChange={props.onChange} type="file" />
                     </span>
+                    <ol className="instructions">
+                        <lh><b>To download your messenger json file</b></lh>
+                        <li>Go to <u>Facebook Settings</u></li>
+                        <li>Select <u>Your Facebook Information</u></li>
+                        <li>Select <u>Download Your Information</u></li>
+                        <li>Set Format to <u>JSON</u></li>
+                        <li>Select <u>Create File</u></li>
+                        <li>Wait for file to be generated and unzip</li><br></br>
+                        <li>Go to the messenger folder, and then the inbox folder</li>
+                        <li>Select the chat you want to analyze and upload message.json</li>
+                    </ol>
                 </Jumbotron>
             </div>
         )

@@ -153,6 +153,16 @@
     text-align: center;
 }
 
+.instructions {
+    width:35vw;
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    font-size:1.4rem;
+    margin-top:4rem;
+    list-style:none;
+}
+
 /* .daytime-heatmap-hint {
     background-color:black;
     padding:0.3rem;
