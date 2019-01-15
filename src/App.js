@@ -6,7 +6,7 @@ import 'bootstrap/dist/js/bootstrap';
 import 'jquery';
 import './style.css';
 
-const MENU_ITEMS = ["A", "B", "C", "D", "E"] // Populates Navigation component
+const MENU_ITEMS = ["Total Messages Heatmap", "Messages per Person", "Day/Time Heatmap", "Word Frequency", "Total Messages Timeseries"] // Populates Navigation component
 
 class App extends React.Component {
 
@@ -16,10 +16,14 @@ class App extends React.Component {
             file: null,
             data: null,
             chatName: "",
-            visualization: "A"
+            visualization: "Total Messages Heatmap"
         }
         this.onFileSelect = this.onFileSelect.bind(this);
         this.onVisualizationSelect = this.onVisualizationSelect.bind(this);
+    }
+
+    componentDidMount() {
+        document.title = "Messenger Web Analyzer"
     }
 
     render() {
@@ -64,7 +68,7 @@ class App extends React.Component {
         });
     }
     onVisualizationSelect(visualization) {
-        this.setState({visualization:  visualization})
+        this.setState({ visualization: visualization })
     }
 }
 

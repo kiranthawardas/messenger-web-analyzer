@@ -9,8 +9,6 @@ import TotalMessagesTimeseries from './TotalMessagesTimeseries.js'
 import TotalMessagesHeatmap from './TotalMessagesHeatmap.js'
 import WordFrequency from './WordFrequency.js'
 
-const MENU_ITEMS = ["A", "B", "C", "D", "E"] // Populates Navigation component
-
 class MessengerVis extends React.Component {
     constructor(props) {
         super(props);
@@ -44,31 +42,31 @@ class MessengerVis extends React.Component {
 function Visualization(props) {
     if (!props.data) return null;
     switch (props.selection) {
-        case "A":
+        case "Messages per Person":
             return (
                 <MessagesPerPerson
                     data={props.data}
                 />
             );
-        case "B":
+        case "Day/Time Heatmap":
             return (
                 <DayAndTimeHeatmap
                     data={props.data}
                 />
             );
-        case "C":
+        case "Word Frequency":
             return (
                 <WordFrequency
                     data={props.data}
                 />
             )
-        case "D":
+        case "Total Messages Timeseries":
             return (
                 <TotalMessagesTimeseries
                     data={props.data}
                 />
             )
-        case "E":
+        case "Total Messages Heatmap":
             return (
                 <TotalMessagesHeatmap
                     data={props.data}
